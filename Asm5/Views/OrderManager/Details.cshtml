@@ -1,0 +1,93 @@
+﻿@model ASM5.Models.Order
+@{
+    ViewData["Title"] = "Chi tiết đơn hàng";
+    Layout = "_LayoutAdmin";
+}
+
+<h2>Chi tiết đơn hàng</h2>
+<hr class="custom-hr" />
+
+<p><strong>Mã đơn hàng:</strong> @Model.OrderId</p>
+<p><strong>Khách hàng:</strong> @Model.Customer?.FullName</p>
+<p><strong>Ngày đặt:</strong> @Model.OrderDate.ToString("dd/MM/yyyy")</p>
+<p><strong>Trạng thái:</strong> @Model.Status</p>
+
+<h3>Sản phẩm:</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Tên Sản Phẩm</th>
+            <th>Giá</th>
+            <th>Số Lượng</th>
+            <th>Thành Tiền</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.OrderDetails)
+        {
+            <tr>
+                <td>@item.Product.ProductName</td>
+                <td>@item.UnitPrice.ToString("N0") VNĐ</td>
+                <td>@item.Quantity</td>
+                <td>@((item.UnitPrice * item.Quantity).ToString("N0")) VNĐ</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<p><strong>Tổng cộng:</strong> @Model.TotalAmount.ToString("N0") VNĐ</p>
+
+<style>
+    h2 {
+        font-family: Arial, sans-serif;
+        color: #333;
+    }
+
+    p {
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+        color: #555;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    th, td {
+        padding: 12px;
+        text-align: left;
+        border: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f4f4f4;
+        font-weight: bold;
+    }
+
+    tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    tbody tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    .alert {
+        margin-bottom: 20px;
+        padding: 15px;
+        background-color: #4CAF50;
+        color: white;
+        border-radius: 4px;
+    }
+
+    .custom-hr {
+        border: none;
+        height: 2px;
+        background-color: #4CAF50;
+        margin: 30px 0;
+        width: 100%;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+</style>

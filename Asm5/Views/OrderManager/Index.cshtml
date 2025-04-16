@@ -1,0 +1,168 @@
+﻿@model List<ASM5.Models.Order>
+@{
+    ViewData["Title"] = "Quản lý đơn hàng";
+    Layout = "_LayoutAdmin";
+}
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success" id="successAlert">
+        <span class="close" onclick="this.parentElement.style.display='none';">&times;</span>
+        @TempData["SuccessMessage"]
+    </div>
+}
+<form method="get" class="filter-form">
+    <input type="text" name="search" placeholder="Tìm kiếm mã hoặc tên khách hàng" value="@ViewData["CurrentSearch"]" class="form-control mb-2" />
+    <select name="status" class="form-select mb-2">
+        <option value="">Tất cả trạng thái</option>
+        <option value="Đang xử lý">Đang xử lý</option>
+        <option value="Đã xác nhận">Đã xác nhận</option>
+        <option value="Đang giao">Đang giao</option>
+        <option value="Đã Giao">Đã Giao</option>
+        <option value="Đã huỹ">Đã huỹ</option>
+    </select>
+    <button type="submit" class="btn btn-primary">Lọc</button>
+</form>
+
+
+<h2>Quản lý đơn hàng</h2>
+<hr class="custom-hr" />
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Mã Đơn Hàng</th>
+            <th>Khách Hàng</th>
+            <th>Ngày Đặt</th>
+            <th>Tổng Tiền</th>
+            <th>Trạng Thái</th>
+            <th>Hành Động</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var order in Model)
+        {
+            <tr>
+                <td>@order.OrderId</td>
+                <td>@order.Customer?.FullName</td>
+                <td>@order.OrderDate.ToString("dd/MM/yyyy")</td>
+                <td>@order.TotalAmount.ToString("N0") VNĐ</td>
+                <td>
+                    <form method="post" asp-action="UpdateOrderStatus">
+                        <input type="hidden" name="Id" value="@order.OrderId" />
+                        <select name="newStatus" class="form-select" style="width:auto; display:inline;">
+                            <option value="Đang xử lý" selected="@((order.Status == "Đang xử lý") ? "selected" : null)">Đang xư lý</option>
+                            <option value="Đã xác nhận" selected="@((order.Status == "Đã xác nhận") ? "selected" : null)">Đã xác nhận</option>
+                            <option value="Đang giao" selected="@((order.Status == "Đang giao") ? "selected" : null)">Đang giao</option>
+                            <option value="Đã Giao" selected="@((order.Status == "Đã Giao") ? "selected" : null)">Đã Giao</option>
+                            <option value="Đã huỹ" selected="@((order.Status == "Đã huỹ") ? "selected" : null)">Đã huỹ</option>
+                        </select>
+                        <button type="submit" class="btn btn-primary">Cập nhật</button>
+                    </form>
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@order.OrderId" class="btn btn-primary">Xem Chi Tiết</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<style>
+    h2 {
+        font-family: Arial, sans-serif;
+        color: #333;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+
+    th, td {
+        padding: 12px;
+        text-align: left;
+        border: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f4f4f4;
+        font-weight: bold;
+    }
+
+    tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    tbody tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    button {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 14px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+    form {
+        display: inline;
+    }
+
+    select.form-select {
+        width: auto;
+        display: inline;
+        padding: 8px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+    }
+
+    label {
+        font-family: Arial, sans-serif;
+        color: #333;
+        margin-top: 8px;
+        display: block;
+    }
+
+    .alert {
+        margin-bottom: 20px;
+        padding: 15px;
+        background-color: #4CAF50;
+        color: white;
+        border-radius: 4px;
+    }
+
+    .close {
+        color: white;
+        font-weight: bold;
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+    .empty-message {
+        color: #ff0000;
+        font-weight: bold;
+        text-align: center;
+        margin: 20px 0;
+    }
+
+    .custom-hr {
+        border: none;
+        height: 2px;
+        background-color: #4CAF50;
+        margin: 30px 0;
+        width: 100%;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+</style>

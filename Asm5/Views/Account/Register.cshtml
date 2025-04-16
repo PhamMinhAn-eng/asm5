@@ -1,0 +1,122 @@
+﻿@model ASM5.Models.RegisterModel
+@{
+    Layout = "_LayoutCustomer";
+    ViewBag.Title = "Đăng ký";
+}
+
+<h2>Đăng ký tài khoản</h2>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">
+        @ViewBag.Error
+    </div>
+}
+
+<form method="post" asp-action="Register">
+    <div class="form-group">
+        <label for="FullName">Họ tên:</label>
+        <input type="text" id="FullName" name="FullName" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label for="Email">Email:</label>
+        <input type="email" id="Email" name="Email" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label for="Password">Mật khẩu:</label>
+        <input type="password" id="Password" name="Password" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label for="Address">Địa chỉ:</label>
+        <input type="text" id="Address" name="Address" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label for="PhoneNumber">Số điện thoại:</label>
+        <input type="text" id="PhoneNumber" name="PhoneNumber" class="form-control" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Đăng ký</button>
+</form>
+
+<!-- CSS -->
+<style>
+    .register-form {
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+        .register-form h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+
+        .form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+            outline: none;
+        }
+
+    .btn {
+        width: 100%;
+        padding: 10px;
+        font-size: 18px;
+        border: none;
+        border-radius: 5px;
+        background-color: #007bff;
+        color: #fff;
+        cursor: pointer;
+        text-align: center;
+        transition: background-color 0.3s ease;
+    }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+    .alert {
+        margin-top: 20px;
+        padding: 15px;
+        background-color: #d4edda;
+        color: #155724;
+        border-radius: 5px;
+        text-align: center;
+        position: relative;
+    }
+
+        .alert .close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+        }
+</style>

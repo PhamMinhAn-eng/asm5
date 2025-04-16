@@ -1,0 +1,88 @@
+﻿@{
+    Layout = "_layoutCustomer";
+}
+@model ASM5.Models.Product
+
+<h2>Chi tiết sản phẩm</h2>
+
+<div class="product-container">
+    <div class="product-image-container">
+        <img src="@Model.Image" alt="@Model.ProductName" class="product-image" />
+    </div>
+
+    <div class="product-info-container">
+        <h3>@Model.ProductName</h3>
+        <p>Giá: @Model.Price.ToString("N0") VNĐ</p> <!-- Hiển thị 'VNĐ' sau giá -->
+        <p>Màu: @Model.Color</p>
+        <p>Kích cỡ: @Model.Size</p>
+        <p>Số lượng: @Model.Quantity</p>
+        <p>Mô tả: @Model.Description</p>
+
+        <!-- Nút Mua tại chi tiết sản phẩm -->
+        <form action="/Cart/AddToCart" method="post">
+            <input type="hidden" name="productId" value="@Model.ProductID" />
+            <input type="hidden" name="customerId" value="@Context.Session.GetInt32("UserID")" />
+            <input type="hidden" name="quantity" value="1" min="1" />
+            <button type="submit" class="btn btn-primary">Thêm vào giỏ hàng</button>
+        </form>
+
+    </div>
+</div>
+
+<!-- CSS -->
+<style>
+    .product-container {
+        display: flex;
+        align-items: flex-start; /* Canh ảnh và thông tin sản phẩm theo chiều dọc */
+        margin: 20px auto;
+        max-width: 900px; /* Giới hạn chiều rộng của khối sản phẩm */
+    }
+
+    .product-image-container {
+        flex: 1;
+        padding-right: 20px;
+    }
+
+    .product-image {
+        width: 100%; /* Ảnh sẽ chiếm toàn bộ chiều rộng của khối bên trái */
+        max-width: 400px; /* Đặt kích thước tối đa cho ảnh */
+        height: auto;
+        border-radius: 10px; /* Bo góc ảnh để trông mềm mại hơn */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Hiệu ứng đổ bóng cho ảnh */
+    }
+
+    .product-info-container {
+        flex: 1;
+        padding-left: 20px;
+        font-size: 18px; /* Tăng kích thước chữ */
+    }
+
+        .product-info-container h3 {
+            font-size: 26px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .product-info-container p {
+            margin: 10px 0;
+            font-size: 18px; /* Tăng kích thước chữ cho các thông tin sản phẩm */
+        }
+
+    .btn-buy {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 10px 20px;
+        font-size: 18px;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        text-decoration: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        .btn-buy:hover {
+            background-color: #218838;
+        }
+</style>

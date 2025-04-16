@@ -1,0 +1,274 @@
+﻿@{
+    Layout = "_LayoutCustomer";
+}
+<style>
+    .filter-box {
+        width: 50px; /* Kích thước khối */
+        height: 50px; /* Kích thước khối */
+        background-color: none; /* Màu nền */
+        color: black; /* Màu chữ */
+        display: flex; /* Sử dụng flexbox để căn giữa nội dung */
+        justify-content: center; /* Căn giữa theo chiều ngang */
+        align-items: center; /* Căn giữa theo chiều dọc */
+        font-size: 1.5rem; /* Kích thước chữ */
+        /* Làm đậm chữ */
+        border-radius: 1px; /* Bo góc khối */
+        cursor: pointer; /* Hiển thị con trỏ tay khi di chuột vào */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ */
+      
+    }
+
+        /* Hiệu ứng khi hover vào khối */
+       
+    /* Tổng thể form */
+    .search-form {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        justify-content: flex-start;
+        align-items: center;
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Trường tìm kiếm sản phẩm */
+    .search-input {
+        padding: 10px;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: 250px;
+        max-width: 100%;
+    }
+
+    /* Chọn danh mục */
+    .category-select {
+        padding: 10px;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: 200px;
+        max-width: 100%;
+    }
+
+    /* Trường giá (ẩn đi mặc định) */
+    .price-filters {
+        display: none;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    /* Các input giá */
+    .price-input {
+        padding: 10px;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: 150px;
+    }
+
+    /* Nút tìm kiếm */
+    .search-btn {
+        padding: 10px 20px;
+        font-size: 1.1rem;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+        .search-btn:hover {
+            background-color: #0056b3;
+        }
+
+    /* Hiệu ứng khi hover vào input và select */
+    .search-input:hover,
+    .category-select:hover,
+    .price-input:hover {
+        border-color: #007bff;
+    }
+
+    /* Hiệu ứng khi hover vào nút tìm kiếm */
+    .search-btn:hover {
+        background-color: #0056b3;
+    }
+
+    /* Hiển thị trường giá khi người dùng bắt đầu tương tác */
+    .search-form .show-filters:checked ~ .price-filters {
+        display: flex;
+    }
+
+    .custom-hr {
+        border: none; /* Xóa đường viền mặc định */
+        height: 2px; /* Độ dày của đường ngang */
+        background-color: #00FFFF; /* Màu sắc của đường ngang */
+        margin: 30px 0; /* Khoảng cách trên và dưới */
+        width: 100%; /* Chiều dài của đường ngang */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Đổ bóng để làm nổi bật */
+    }
+    .product-category {
+        margin-bottom: 40px;
+    }
+
+    .product-item {
+        display: inline-block;
+        width: 262px; /* Tăng chiều rộng của div */
+        padding: 15px; /* Tăng padding cho nội dung bên trong */
+        margin: 50px; /* Tăng khoảng cách giữa các div */
+        border: 1px solid #ddd;
+        text-align: center;
+        position: relative;
+        height: 520px; /* Tăng chiều cao để tạo không gian cho nội dung */
+        box-sizing: border-box;
+    }
+
+    .product-image {
+        width: 100%;
+        height: 240px; /* Tăng chiều cao của ảnh */
+        object-fit: cover;
+    }
+
+    .product-info {
+        margin-top: 30px;
+        height: 120px; /* Tăng chiều cao để chứa thêm thông tin */
+        overflow: hidden;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 5px 10px;
+        margin: 5px;
+        border: none;
+        border-radius: 5px;
+        background-color: #007bff;
+        color: white;
+        text-decoration: none;
+    }
+
+        .btn:hover {
+            background-color: #0056b3; /* Đổi màu khi hover */
+        }
+
+    .search-form {
+        display: flex;
+        align-items: center; /* Căn giữa theo trục dọc */
+        justify-content: flex-start; /* Căn cùng hàng từ bên trái */
+    }
+
+    .search-input {
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ddd;
+        border-radius: 5px 0 0 5px; /* Bo góc trái */
+        width: 300px; /* Chiều rộng của ô input */
+        box-sizing: border-box;
+    }
+
+    .search-button {
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #007bff;
+        color: white;
+        border: 1px solid #007bff;
+        border-radius: 0 5px 5px 0; /* Bo góc phải */
+        cursor: pointer;
+    }
+
+        .search-button:hover {
+            background-color: #0056b3; /* Đổi màu khi hover */
+        }
+
+
+</style>
+
+@model IEnumerable<IGrouping<string, ASM5.Models.Product>>
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-success" id="successAlert">
+        <span class="close" onclick="this.parentElement.style.display='none';">&times;</span>
+        @TempData["ErrorMessage"]
+    </div>
+}
+<form method="get" asp-action="Search" class="search-form">
+    <input type="text" name="searchTerm" placeholder="Tìm kiếm sản phẩm" class="search-input" />
+
+    <select name="categoryId" class="category-select">
+        <option value="">Tất cả danh mục</option>
+        <option value="1">Điện tử</option>
+        <option value="2">Thời trang</option>
+    </select>
+
+    <div class="price-filters" id="priceFilters">
+        <input type="number" name="minPrice" placeholder="Giá tối thiểu" step="100" class="price-input" />
+        <input type="number" name="maxPrice" placeholder="Giá tối đa" step="100" class="price-input" />
+    </div>
+
+    <button type="submit" class="search-btn">Tìm kiếm</button>
+    <div class="filter-box" id="search-btn">
+        Lọc
+    </div>
+</form>
+
+
+<hr class="custom-hr" />
+@foreach (var categoryGroup in Model)
+{
+    <h2>@categoryGroup.Key</h2> <!-- Tên danh mục -->
+
+    <div class="product-category">
+        @foreach (var product in categoryGroup)
+        {
+            <div class="product-item">
+                <img src="@product.Image" alt="@product.ProductName" class="product-image" />
+                <div class="product-info">
+                    <h3>@product.ProductName</h3>
+                    <p>Giá: @product.Price.ToString("N0") VNĐ</p>
+                    <p>Màu: @product.Color</p>
+                    <p>Kích cỡ: @product.Size</p>
+                    <p>Số lượng: @product.Quantity</p>
+
+                    <!-- Nút Mua -->
+
+                </div>
+                <form action="/Cart/AddToCart" method="post">
+                    <input type="hidden" name="productId" value="@product.ProductID" />
+                    <input type="hidden" name="customerId" value="@Context.Session.GetString("UserID")" />
+                    <input type="hidden" name="quantity" value="1" min="1" />
+                    <button type="submit" class="btn btn-primary">Thêm vào giỏ hàng</button>
+                </form>
+
+                <!-- Nút Xem Chi Tiết -->
+                <a href="@Url.Action("Details", "Products", new { id = product.ProductID })" class="btn btn-details">Xem Chi Tiết</a>
+            </div>
+        }
+    </div>
+    <script>
+        // Thêm sự kiện để hiển thị các trường lọc giá khi người dùng bắt đầu tìm kiếm
+        document.getElementById('search-btn').addEventListener('click', function (event) {
+            const priceFilters = document.getElementById('priceFilters');
+
+            // Kiểm tra xem nếu có nhập vào giá thì hiển thị các trường lọc giá
+            const minPrice = document.querySelector('input[name="minPrice"]').value;
+            const maxPrice = document.querySelector('input[name="maxPrice"]').value;
+
+            if (priceFilters.style.display == 'none') {
+                priceFilters.style.display = 'flex';
+            } else if (priceFilters.style.display ='flex') {
+                priceFilters.style.display = 'none';
+            }
+        });
+    </script>
+
+}
+
+
+
+
+
+
+
+

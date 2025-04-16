@@ -1,0 +1,74 @@
+﻿
+
+/* Style cho các liên kết trong navbar */
+.nav-link {
+    color: white !important; /* Màu trắng cho liên kết */
+    transition: color 0.3s;
+    text-decoration: none; /* Bỏ gạch chân */
+   
+}
+
+    .nav-link:hover {
+        color: #ffd700; /* Màu vàng khi hover */
+    }
+.navbar-nav {
+    margin-left: auto; /* Đẩy các phần tử về bên phải */
+}
+
+/* Style cho footer */
+footer {
+    background-color: #343a40; /* Màu nền footer tối */
+    color: white;
+    padding: 1rem;
+}
+
+
+
+header {
+    position: relative;
+    width: 100%;
+    height: 600px; /* Chiều cao của header */
+
+    background-image: url('../images/vector-shopping-online-banner.jpg');
+    /*    background-image: url('../images/baner.png');*/
+    /* Đường dẫn đến ảnh nền */
+    background-size: 100% 100%; /* Phủ khít toàn bộ header, không giữ tỉ lệ */
+    background-position: center; /* Căn giữa ảnh */
+}
+.product-category {
+    margin-bottom: 40px;
+}
+
+.product-item {
+    display: inline-block;
+    width: 200px;
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+    position: relative; /* Để chứa nút */
+}
+
+.product-image {
+    width: 100%;
+    height: auto;
+}
+
+.product-info {
+    margin-top: 10px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 5px 10px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+}
+
+    .btn:hover {
+        background-color: #0056b3; /* Đổi màu khi hover */
+    }

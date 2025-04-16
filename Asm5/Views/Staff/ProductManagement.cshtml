@@ -1,0 +1,351 @@
+﻿@model List<ASM5.Models.Product>
+
+@{
+    Layout = "_LayoutAdmin";
+    ViewData["Title"] = "Quản Lý Sản Phẩm";
+    var HoatDong = Model.Where(p => p.TinhTrang == "On").ToList();
+    var NgungHoatDong = Model.Where(p => p.TinhTrang == "Off").ToList();
+}
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success" id="successAlert">
+        <span class="close" onclick="this.parentElement.style.display='none';">&times;</span>
+        @TempData["SuccessMessage"]
+    </div>
+}
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger" id="errorAlert">
+        <span class="close" onclick="this.parentElement.style.display='none';">&times;</span>
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+<h2>Quản Lý Sản Phẩm</h2>
+<hr class="custom-hr" />
+
+<!-- Form tìm kiếm sản phẩm -->
+<h3>Tìm kiếm sản phẩm</h3>
+<form method="get" action="/Staff/Search" class="search-form">
+    <div class="search-container">
+        <input type="text" name="searchTerm" placeholder="Tìm kiếm sản phẩm..." required class="search-input" />
+        <button type="submit" class="search-button">Tìm kiếm</button>
+    </div>
+</form>
+
+<!-- Nhóm sản phẩm đang bán -->
+<h3>Sản Phẩm Đang Bán</h3>
+@if (HoatDong.Any())
+{
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Tên Sản Phẩm</th>
+                <th>Giá</th>
+                <th>Số Lượng</th>
+                <th>Ảnh</th>
+                <th>Hành Động</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in HoatDong)
+            {
+                <tr>
+                    <td>@product.ProductID</td>
+                    <td>@product.ProductName</td>
+                    <td>@product.Price.ToString("N0") VNĐ</td>
+                    <td>@product.Quantity</td>
+                    <td><img src="@product.Image" alt="@product.ProductName" width="100" /></td>
+                    <td>
+                        <form method="post" action="/Staff/StopSelling">
+                            <input type="hidden" name="ProductID" value="@product.ProductID" />
+                            <button type="submit">Ngừng Bán</button>
+                        </form>
+                        <button onclick="showModal(); openEditForm(@product.ProductID)">Chỉnh Sửa</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p class="empty-message">Không có sản phẩm nào đang bán.</p>
+}
+
+<!-- Nhóm sản phẩm ngừng bán -->
+<h3>Sản Phẩm Ngừng Bán</h3>
+@if (NgungHoatDong.Any())
+{
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Tên Sản Phẩm</th>
+                <th>Giá</th>
+                <th>Số Lượng</th>
+                <th>Ảnh</th>
+                <th>Hành Động</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in NgungHoatDong)
+            {
+                <tr>
+                    <td>@product.ProductID</td>
+                    <td>@product.ProductName</td>
+                    <td>@product.Price.ToString("N0") VNĐ</td>
+                    <td>@product.Quantity</td>
+                    <td><img src="@product.Image" alt="@product.ProductName" width="100" /></td>
+                    <td>
+                        <form method="post" action="/Staff/Activate1">
+                            <input type="hidden" name="ProductID" value="@product.ProductID" />
+                            <button type="submit">Kích Hoạt Lại</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p class="empty-message">Không có sản phẩm nào ngừng bán.</p>
+}
+
+<hr class="custom-hr" />
+
+<!-- Form thêm sản phẩm mới -->
+<form method="post" action="/Staff/AddProduct" enctype="multipart/form-data">
+    <h3>Thêm Sản Phẩm Mới</h3>
+    <label for="ProductName">Tên Sản Phẩm:</label>
+    <input type="text" id="ProductName" name="ProductName" required />
+
+    <label for="Price">Giá:</label>
+    <input type="number" id="Price" name="Price" required />
+
+    <label for="Quantity">Số Lượng:</label>
+    <input type="number" id="Quantity" name="Quantity" required />
+
+    <label for="Color">Màu Sắc:</label>
+    <input type="text" id="Color" name="Color" required />
+
+    <label for="Size">Kích Thước:</label>
+    <input type="text" id="Size" name="Size" required />
+
+    <label for="Description">Mô Tả:</label>
+    <textarea id="Description" name="Description" required></textarea>
+
+    <label for="ProductImage">Ảnh Sản Phẩm:</label>
+    <input type="file" id="ProductImage" name="ProductImage" accept="image/*" required />
+
+    <label for="CategoryID">Danh Mục:</label>
+    <select id="CategoryID" name="CategoryID" required>
+        <option value="1">Electronics</option>
+        <option value="2">Fashion</option>
+    </select>
+
+    <button type="submit">Thêm Sản Phẩm</button>
+</form>
+
+<!-- Modal chỉnh sửa sản phẩm -->
+<div class="modal-background" id="successModal" style="display:none;">
+    <form method="post" action="/Staff/UpdateProduct" enctype="multipart/form-data" id="productEditForm">
+        <h3>Chỉnh Sửa Sản Phẩm</h3>
+        <input type="hidden" id="EditProductID" name="ProductID" />
+
+        <label for="EditProductName">Tên Sản Phẩm:</label>
+        <input type="text" id="EditProductName" name="ProductName" required />
+
+        <label for="EditPrice">Giá:</label>
+        <input type="number" id="EditPrice" name="Price" required />
+
+        <label for="EditQuantity">Số Lượng:</label>
+        <input type="number" id="EditQuantity" name="Quantity" required />
+
+        <label for="EditColor">Màu Sắc:</label>
+        <input type="text" id="EditColor" name="Color" required />
+
+        <label for="EditSize">Kích Thước:</label>
+        <input type="text" id="EditSize" name="Size" required />
+
+        <label for="EditDescription">Mô Tả:</label>
+        <textarea id="EditDescription" name="Description" required></textarea>
+
+        <label for="EditProductImage">Ảnh Sản Phẩm:</label>
+        <input type="file" id="EditProductImage" name="ProductImage" accept="image/*" />
+
+        <button type="submit">Cập Nhật Sản Phẩm</button>
+        <button type="button" onclick="closeModal()">Đóng</button>
+    </form>
+</div>
+
+<script>
+    let selectedProductID;
+    function openEditForm(productID) {
+        selectedProductID = productID;
+        document.getElementById('EditProductID').value = selectedProductID;
+        // Bạn có thể thực hiện AJAX để điền dữ liệu chi tiết của sản phẩm vào form chỉnh sửa
+    }
+    function showModal() {
+        document.getElementById('successModal').style.display = 'flex';
+    }
+    function closeModal() {
+        document.getElementById('successModal').style.display = 'none';
+    }
+</script>
+
+<style>
+    #productEditForm {
+        background-color: white; /* Nền trắng cho form */
+        padding: 20px; /* Khoảng cách bên trong form */
+        border-radius: 10px; /* Bo góc form */
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Tạo bóng đổ */
+        max-width: 450px; /* Chiều rộng tối đa của form */
+        width: 100%; /* Form sẽ chiếm toàn bộ chiều rộng trong khoảng tối đa */
+    }
+    .modal-background {
+        display: none; /* Sử dụng Flexbox */
+        position: fixed;
+        top: 50%; /* Căn giữa theo chiều dọc */
+        left: 50%; /* Căn giữa theo chiều ngang */
+        transform: translate(-50%, -50%); /* Đẩy ngược 50% chiều rộng và chiều cao để căn giữa */
+        width: 450px;
+        height: 800px;
+        background-color: white;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Tạo bóng cho modal */
+        border-radius: 10px; /* Bo góc */
+        z-index: 1000; /* Đảm bảo modal nằm trên các phần tử khác */
+    }
+
+
+    /* Phần hộp thoại modal */
+    .modal-content {
+        background-color: white; /* Màu nền của modal */
+        padding: 30px; /* Khoảng cách bên trong */
+        border-radius: 10px; /* Bo góc */
+        text-align: left; /* Căn chỉnh bên trái */
+        max-width: 400px; /* Chiều rộng tối đa */
+        width: 100%; /* Chiếm toàn bộ chiều rộng */
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Bóng đổ */
+    }
+
+        /* Thêm màu nền cho các div chứa thông tin */
+        .modal-content div {
+            background-color: #f8f9fa; /* Màu nền cho từng trường */
+            padding: 10px; /* Khoảng cách bên trong */
+            margin-bottom: 15px; /* Khoảng cách giữa các trường */
+            border-radius: 5px; /* Bo góc */
+        }
+    h2, h3 {
+        font-family: Arial, sans-serif;
+        color: #333;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+
+    th, td {
+        padding: 12px;
+        text-align: left;
+        border: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f4f4f4;
+        font-weight: bold;
+    }
+
+    tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    tbody tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    button {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 14px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="file"] {
+        width: calc(100% - 24px);
+        padding: 10px;
+        margin: 8px 0;
+        display: block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    label {
+        font-family: Arial, sans-serif;
+        color: #333;
+        margin-top: 8px;
+        display: block;
+    }
+
+    .empty-message {
+        color: #ff0000;
+        font-weight: bold;
+        text-align: center;
+        margin: 20px 0;
+    }
+
+    .search-container {
+        display: flex; /* Sử dụng Flexbox để căn giữa các phần tử */
+        align-items: center; /* Căn giữa theo chiều dọc */
+        margin: 20px 0; /* Khoảng cách trên và dưới */
+    }
+
+    .search-input {
+        flex: 1; /* Chiếm toàn bộ chiều rộng còn lại */
+        padding: 10px; /* Khoảng cách bên trong */
+        border: 1px solid #ccc; /* Đường viền */
+        border-radius: 4px; /* Bo góc */
+        margin-right: 10px; /* Khoảng cách giữa input và button */
+    }
+
+    .search-button {
+        background-color: #4CAF50; /* Màu nền */
+        color: white; /* Màu chữ */
+        border: none; /* Xóa đường viền */
+        padding: 10px 20px; /* Khoảng cách bên trong */
+        border-radius: 4px; /* Bo góc */
+        cursor: pointer; /* Con trỏ khi di chuột */
+    }
+
+        .search-button:hover {
+            background-color: #45a049; /* Màu nền khi hover */
+        }
+
+    .custom-hr {
+        border: none; /* Xóa đường viền mặc định */
+        height: 2px; /* Độ dày của đường ngang */
+        background-color: #4CAF50; /* Màu sắc của đường ngang */
+        margin: 30px 0; /* Khoảng cách trên và dưới */
+        width: 100%; /* Chiều dài của đường ngang */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Đổ bóng để làm nổi bật */
+    }
+
+</style>

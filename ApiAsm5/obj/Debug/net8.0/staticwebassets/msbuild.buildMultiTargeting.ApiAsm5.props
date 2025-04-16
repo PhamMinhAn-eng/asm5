@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\ApiAsm5.props" />
+</Project>

@@ -1,0 +1,208 @@
+﻿@model List<ASM5.Models.User>
+
+@{
+    Layout = "_LayoutAdmin";
+    ViewData["Title"] = "Trang Nhân Viên";
+    var nhanVienHoatDong = Model.Where(u => u.TinhTrangHoatDong == "On").ToList();
+    var nhanVienNgungHoatDong = Model.Where(u => u.TinhTrangHoatDong == "Off").ToList();
+}
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success" id="successAlert">
+        <span class="close" onclick="this.parentElement.style.display='none';">&times;</span>
+        @TempData["SuccessMessage"]
+    </div>
+}
+<h2>Quản lý nhân viên</h2>
+<hr class="custom-hr" />
+
+<h3>Nhân viên đang hoạt động</h3>
+@if (nhanVienHoatDong.Any())
+{
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Tên</th>
+                <th>Email</th>
+                <th>Vai trò</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in nhanVienHoatDong)
+            {
+                <tr>
+                    <td>@user.Id</td>
+                    <td>@user.FullName</td>
+                    <td>@user.Email</td>
+                    <td>@string.Join(", ", user.Roles)</td>
+                    <td>
+                        <form method="post" action="/Staff/UpdateRole">
+                            <input type="hidden" name="userId" value="@user.Id" />
+                            <button type="submit">Cập nhật thành Quản lý</button>
+                        </form>
+                        <form method="post" action="/Staff/Deactivate">
+                            <input type="hidden" name="userId" value="@user.Id" />
+                            <button type="submit">Ngừng hoạt động</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p class="empty-message">Không có nhân viên nào đang hoạt động.</p>
+}
+
+<h3>Nhân viên không hoạt động</h3>
+@if (nhanVienNgungHoatDong.Any())
+{
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Tên</th>
+                <th>Email</th>
+                <th>Vai trò</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in nhanVienNgungHoatDong)
+            {
+                <tr>
+                    <td>@user.Id</td>
+                    <td>@user.FullName</td>
+                    <td>@user.Email</td>
+                    <td>@string.Join(", ", user.Roles)</td>
+                    <td>
+                        <form method="post" action="/Staff/Activate">
+                            <input type="hidden" name="userId" value="@user.Id" />
+                            <button type="submit">Kích hoạt lại</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p class="empty-message">Không có nhân viên nào đang ngừng hoạt động.</p>
+}
+
+<hr class="custom-hr" />
+<h3>Thêm nhân viên mới</h3>
+<form method="post" action="/Staff/AddEmployee">
+    <label for="FullName">Họ tên:</label>
+    <input type="text" id="FullName" name="FullName" required />
+
+    <label for="Email">Email:</label>
+    <input type="email" id="Email" name="Email" required />
+
+    <label for="Password">Mật khẩu:</label>
+    <input type="password" id="Password" name="Password" required />
+
+    <label for="Address">Địa chỉ:</label>
+    <input type="text" id="Address" name="Address" required />
+
+    <label for="Phone">Số điện thoại:</label>
+    <input type="text" id="PhoneNumber" name="PhoneNumber" required />
+
+    <button type="submit">Thêm nhân viên</button>
+</form>
+
+
+<style>
+    h2, h3 {
+        font-family: Arial, sans-serif;
+        color: #333;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+
+    th, td {
+        padding: 12px;
+        text-align: left;
+        border: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f4f4f4;
+        font-weight: bold;
+    }
+
+    tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    tbody tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    button {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 14px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+
+    button:hover {
+        background-color: #45a049;
+    }
+
+    form {
+        display: inline;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+        width: calc(100% - 24px);
+        padding: 10px;
+        margin: 8px 0;
+        display: block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    label {
+        font-family: Arial, sans-serif;
+        color: #333;
+        margin-top: 8px;
+        display: block;
+    }
+
+    .empty-message {
+        color: #ff0000;
+        font-weight: bold;
+        text-align: center;
+        margin: 20px 0;
+    }
+
+    
+
+    .custom-hr {
+        border: none; /* Xóa đường viền mặc định */
+        height: 2px; /* Độ dày của đường ngang */
+        background-color: #4CAF50; /* Màu sắc của đường ngang */
+        margin: 30px 0; /* Khoảng cách trên và dưới */
+        width: 100%; /* Chiều dài của đường ngang */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Đổ bóng để làm nổi bật */
+    }
+
+</style>

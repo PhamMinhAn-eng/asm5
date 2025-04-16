@@ -1,0 +1,67 @@
+﻿@{
+    Layout = "_LayoutAdmin"; // Chỉ định layout cho trang admin
+    ViewData["Title"] = "Trang chủ Admin";
+}
+
+<div class="container">
+    <h1 class="text-center my-4">Chào mừng đến với Bảng Điều Khiển Admin!</h1>
+
+    <div class="alert alert-info">
+        <h4>Hướng dẫn sử dụng:</h4>
+        <p>Trang này là nơi bạn có thể quản lý tất cả các chức năng của hệ thống. Dưới đây là một số tính năng bạn có thể sử dụng:</p>
+        <ul>
+            <li><strong>Quản lý sản phẩm:</strong> Thêm, sửa, xóa các sản phẩm trong kho hàng.</li>
+            <li><strong>Quản lý người dùng:</strong> Xem và chỉnh sửa thông tin người dùng trong hệ thống.</li>
+            <li><strong>Xem báo cáo:</strong> Theo dõi các báo cáo về doanh thu, số lượng bán hàng và người dùng.</li>
+            <li><strong>Cài đặt hệ thống:</strong> Cấu hình các thiết lập cần thiết cho hệ thống.</li>
+        </ul>
+    </div>
+
+    <h2 class="my-4">Tin tức mới nhất</h2>
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="card-title">Cập nhật tính năng mới!</h5>
+            <p class="card-text">Chúng tôi đã thêm một số tính năng mới trong phiên bản này. Hãy kiểm tra chúng ngay hôm nay!</p>
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="card-title">Bảo trì hệ thống</h5>
+            <p class="card-text">Hệ thống sẽ được bảo trì vào cuối tuần. Vui lòng lưu ý để không bị gián đoạn trong công việc.</p>
+        </div>
+    </div>
+</div>
+<style>
+    /* admin.css */
+
+    body {
+        background-color: #f8f9fa;
+        color: #343a40;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+        color: #007bff; /* Màu xanh cho tiêu đề */
+    }
+
+    .alert {
+        border-radius: 0.5rem; /* Bo tròn góc cho alert */
+    }
+
+    .card {
+        border: none; /* Không viền */
+        border-radius: 0.5rem; /* Bo tròn góc cho card */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Đổ bóng cho card */
+    }
+
+    .card-title {
+        color: #007bff; /* Màu xanh cho tiêu đề của card */
+    }
+
+    .navbar {
+        margin-bottom: 20px; /* Khoảng cách dưới cho navbar */
+    }
+
+    
+</style>

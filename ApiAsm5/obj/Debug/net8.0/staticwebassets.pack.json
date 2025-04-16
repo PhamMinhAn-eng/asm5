@@ -1,0 +1,109 @@
+{
+  "Files": [
+    {
+      "Id": "D:\\TaiLieuHoc\\C5\\BaiTap\\Asm5\\ApiAsm5\\wwwroot\\Image\\Screenshot 2025-02-09 134434.png",
+      "PackagePath": "staticwebassets\\Image\\Screenshot 2025-02-09 134434.png"
+    },
+    {
+      "Id": "D:\\TaiLieuHoc\\C5\\BaiTap\\Asm5\\ApiAsm5\\wwwroot\\images\\Lap2.jpg",
+      "PackagePath": "staticwebassets\\images\\Lap2.jpg"
+    },
+    {
+      "Id": "D:\\TaiLieuHoc\\C5\\BaiTap\\Asm5\\ApiAsm5\\wwwroot\\images\\Screenshot 2024-09-23 200312.png",
+      "PackagePath": "staticwebassets\\images\\Screenshot 2024-09-23 200312.png"
+    },
+    {
+      "Id": "D:\\TaiLieuHoc\\C5\\BaiTap\\Asm5\\ApiAsm5\\wwwroot\\images\\Screenshot 2025-02-09 134434.png",
+      "PackagePath": "staticwebassets\\images\\Screenshot 2025-02-09 134434.png"
+    },
+    {
+      "Id": "D:\\TaiLieuHoc\\C5\\BaiTap\\Asm5\\ApiAsm5\\wwwroot\\images\\Screenshot_20240916_052342.png",
+      "PackagePath": "staticwebassets\\images\\Screenshot_20240916_052342.png"
+    },
+    {
+      "Id": "D:\\TaiLieuHoc\\C5\\BaiTap\\Asm5\\ApiAsm5\\wwwroot\\images\\Screenshot_20240920_023615.png",
+      "PackagePath": "staticwebassets\\images\\Screenshot_20240920_023615.png"
+    },
+    {
+      "Id": "D:\\TaiLieuHoc\\C5\\BaiTap\\Asm5\\ApiAsm5\\wwwroot\\images\\Screenshot_20240923_080306.png",
+      "PackagePath": "staticwebassets\\images\\Screenshot_20240923_080306.png"
+    },
+    {
+      "Id": "D:\\TaiLieuHoc\\C5\\BaiTap\\Asm5\\ApiAsm5\\wwwroot\\images\\Screenshot_20241013_074125.png",
+      "PackagePath": "staticwebassets\\images\\Screenshot_20241013_074125.png"
+    },
+    {
+      "Id": "D:\\TaiLieuHoc\\C5\\BaiTap\\Asm5\\ApiAsm5\\wwwroot\\images\\anh1",
+      "PackagePath": "staticwebassets\\images"
+    },
+    {
+      "Id": "D:\\TaiLieuHoc\\C5\\BaiTap\\Asm5\\ApiAsm5\\wwwroot\\images\\dt1.jpg",
+      "PackagePath": "staticwebassets\\images\\dt1.jpg"
+    },
+    {
+      "Id": "D:\\TaiLieuHoc\\C5\\BaiTap\\Asm5\\ApiAsm5\\wwwroot\\images\\dulichj2.jpg",
+      "PackagePath": "staticwebassets\\images\\dulichj2.jpg"
+    },
+    {
+      "Id": "D:\\TaiLieuHoc\\C5\\BaiTap\\Asm5\\ApiAsm5\\wwwroot\\images\\iphone-13-pro.jpg",
+      "PackagePath": "staticwebassets\\images\\iphone-13-pro.jpg"
+    },
+    {
+      "Id": "D:\\TaiLieuHoc\\C5\\BaiTap\\Asm5\\ApiAsm5\\wwwroot\\images\\lab3.webp",
+      "PackagePath": "staticwebassets\\images\\lab3.webp"
+    },
+    {
+      "Id": "D:\\TaiLieuHoc\\C5\\BaiTap\\Asm5\\ApiAsm5\\wwwroot\\images\\lap1.avif",
+      "PackagePath": "staticwebassets\\images\\lap1.avif"
+    },
+    {
+      "Id": "D:\\TaiLieuHoc\\C5\\BaiTap\\Asm5\\ApiAsm5\\wwwroot\\images\\mens-suits-male-bodies-gq-june-july-2021-01 (1).webp",
+      "PackagePath": "staticwebassets\\images\\mens-suits-male-bodies-gq-june-july-2021-01 (1).webp"
+    },
+    {
+      "Id": "D:\\TaiLieuHoc\\C5\\BaiTap\\Asm5\\ApiAsm5\\wwwroot\\images\\meo.jpg",
+      "PackagePath": "staticwebassets\\images\\meo.jpg"
+    },
+    {
+      "Id": "D:\\TaiLieuHoc\\C5\\BaiTap\\Asm5\\ApiAsm5\\wwwroot\\images\\samsung-s21.jpg",
+      "PackagePath": "staticwebassets\\images\\samsung-s21.jpg"
+    },
+    {
+      "Id": "D:\\TaiLieuHoc\\C5\\BaiTap\\Asm5\\ApiAsm5\\wwwroot\\images\\suits-oversized-2.jpg",
+      "PackagePath": "staticwebassets\\images\\suits-oversized-2.jpg"
+    },
+    {
+      "Id": "D:\\TaiLieuHoc\\C5\\BaiTap\\Asm5\\ApiAsm5\\wwwroot\\images\\tshirt-white.jpg",
+      "PackagePath": "staticwebassets\\images\\tshirt-white.jpg"
+    },
+    {
+      "Id": "D:\\TaiLieuHoc\\C5\\BaiTap\\Asm5\\ApiAsm5\\wwwroot\\images\\uPTkLTkC2kZiKzWGCs7oG3.jpg",
+      "PackagePath": "staticwebassets\\images\\uPTkLTkC2kZiKzWGCs7oG3.jpg"
+    },
+    {
+      "Id": "D:\\TaiLieuHoc\\C5\\BaiTap\\Asm5\\ApiAsm5\\wwwroot\\images\\women-dress.jpg",
+      "PackagePath": "staticwebassets\\images\\women-dress.jpg"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.ApiAsm5.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.ApiAsm5.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.ApiAsm5.props",
+      "PackagePath": "build\\ApiAsm5.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.ApiAsm5.props",
+      "PackagePath": "buildMultiTargeting\\ApiAsm5.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.ApiAsm5.props",
+      "PackagePath": "buildTransitive\\ApiAsm5.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

@@ -1,0 +1,117 @@
+﻿@model ASM5.Models.Order
+
+@{
+    Layout = "_LayoutCustomer";
+    ViewData["Title"] = "Chi tiết đơn hàng";
+}
+
+<h1 class="page-title">Chi tiết đơn hàng</h1>
+
+<div class="order-details">
+    <p><strong>Mã đơn hàng:</strong> @Model.OrderId</p>
+    <p><strong>Ngày đặt:</strong> @Model.OrderDate.ToString("dd/MM/yyyy")</p>
+    <p><strong>Trạng thái:</strong> @Model.Status</p>
+    <p><strong>Tổng cộng:</strong> @Model.TotalAmount.ToString("N0") VNĐ</p>
+</div>
+
+<h2 class="product-title">Sản phẩm trong đơn hàng</h2>
+
+<table class="order-table">
+    <thead>
+        <tr>
+            <th>Sản phẩm</th>
+            <th>Giá</th>
+            <th>Số lượng</th>
+            <th>Thành tiền</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var detail in Model.OrderDetails)
+        {
+            <tr>
+                <td>@detail.Product.ProductName</td>
+                <td>@detail.UnitPrice.ToString("N0") VNĐ</td>
+                <td>@detail.Quantity</td>
+                <td>@((detail.UnitPrice * detail.Quantity).ToString("N0")) VNĐ</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="OrderHistory" class="btn btn-back">Quay lại lịch sử</a>
+
+<style>
+    /* Tiêu đề trang */
+    .page-title {
+        font-size: 2rem;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    /* Phần chi tiết đơn hàng */
+    .order-details {
+        margin-bottom: 30px;
+        font-size: 1.1rem;
+        color: #555;
+    }
+
+    .order-details p {
+        margin-bottom: 10px;
+    }
+
+    .order-details strong {
+        color: #333;
+    }
+
+    /* Tiêu đề bảng sản phẩm */
+    .product-title {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+        color: #333;
+    }
+
+    /* Cải thiện giao diện bảng */
+    .order-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    .order-table th,
+    .order-table td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .order-table th {
+        background-color: #007bff;
+        color: white;
+        font-size: 1.1rem;
+    }
+
+    .order-table tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    .order-table tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    /* Nút quay lại lịch sử */
+    .btn-back {
+        padding: 8px 16px;
+        background-color: #28a745;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+        transition: background-color 0.3s;
+        margin-top: 20px;
+        display: inline-block;
+    }
+
+    .btn-back:hover {
+        background-color: #218838;
+    }
+</style>
